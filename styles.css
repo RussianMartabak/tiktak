@@ -1,0 +1,46 @@
+*{
+    box-sizing: border-box;
+}
+
+.center{
+    text-align: center;
+}
+body{
+    font-family: 'Ubuntu';
+    margin: 0;
+    height: calc(100vh - 50px);
+}
+
+.nav-container{
+    height: 75px;
+    padding: 15px;
+    border-bottom: 2px solid black;
+}
+
+.nav-container h1{
+    font-weight: bold;
+    margin: 0;
+}
+
+p{
+    font-size: 20px;
+}
+.main-content{
+    display: flex;
+    justify-content: flex-end;
+}
+.game{
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.players{
+    
+    width: 33%;
+}
+.gameboard{
+    width: 450px;
+    height: 450px;
+    border: 1px solid black;
+}
