@@ -61,7 +61,13 @@ p{
     flex-wrap: wrap;
     background-image: url('assets/background.svg');
 }
-
+.x{
+    background-image: url('assets/x.svg');
+}
+.gameboard-grid{
+    height: 150px;
+    width: 150px;
+}
 #new-game{
     width: 200px;
     display: block;
