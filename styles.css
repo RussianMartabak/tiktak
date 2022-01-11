@@ -9,6 +9,7 @@ body{
     font-family: 'Ubuntu';
     margin: 0;
     height: calc(100vh - 50px);
+    overflow: hidden;
 }
 
 .nav-container{
@@ -36,11 +37,17 @@ p{
 }
 
 .players{
-    
+    padding: 32px;
     width: 33%;
 }
 .gameboard{
     width: 450px;
     height: 450px;
     border: 1px solid black;
+}
+
+#new-game{
+    width: 200px;
+    display: block;
+    margin: 16px auto;
 }
