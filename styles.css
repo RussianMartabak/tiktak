@@ -36,9 +36,15 @@ p{
     flex-direction: column;
 }
 
-.players{
+.player-board{
     padding: 32px;
     width: 33%;
+}
+
+.player p{
+    width: 150px;
+    display: inline-block;
+    margin: 16px 0;
 }
 .gameboard{
     width: 450px;
