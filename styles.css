@@ -40,9 +40,16 @@ p{
     padding: 32px;
     width: 33%;
 }
-
+.player-board img{
+    height: 36px;
+    
+}
+.player{
+    display: flex;
+    align-items: center;
+}
 .player p{
-    width: 150px;
+    width: 125px;
     display: inline-block;
     margin: 16px 0;
 }
@@ -57,3 +64,7 @@ p{
     display: block;
     margin: 16px auto;
 }
+
+/* .gameboard{
+    background-image: url('assets/background.svg');
+} */
