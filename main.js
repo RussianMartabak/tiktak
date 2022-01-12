@@ -24,16 +24,76 @@ const gameBoard = (() => {
         }
         console.log(board);
     }
+    const gameWon = player => {
+        if (horizontalCheck(player)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    const isFull = () => {
+        let blanks = 0;
+        for(let i = 0; i < 3; i++) {
+            
+            for(let j = 0; j < 3; j++) {
+                if (board[i][j] === '') blanks++;
+            }
+            
+        }
+        return (blanks === 0) ? true : false;
+    }
+    const horizontalCheck = player => {
+        //count the number of player's item in horizontal lanes
+        let consectutives = 0;
+        for(let i = 0; i < 3; i++) {
+            consectutives = 0;
+            for(let j = 0; j < 3; j++) {
+                if (board[i][j] === player.item) consectutives++;
+            }
+            return (consectutives === 3) ? true : false;
+        }
+    }
 
     //add checker for gameOver
-    return {init, board}; 
+    return {init, board, gameWon, isFull}; 
 })();
 
 const displayController = (() =>{
+    const removeEventListeners = () => {
+        let grids = document.querySelectorAll('.gameboard-grid');
+        grids.forEach( e => e.removeEventListener('click', handler))
+    }
+    function handler(e) {
+        
+        console.log(e.target);
+        
+        
+        let i = e.target.getAttribute('data-i-index');
+        let j = e.target.getAttribute('data-j-index');
+        if (gameBoard.board[i][j] === '') {
+            gameBoard.board[i][j] = currentPlayer.item;
+            e.target.classList.add(currentPlayer.item);
+            console.table(gameBoard.board);
+        }
+        //check if currentplyaer win
+        if (gameBoard.gameWon(currentPlayer)) {
+            turnDisplay.textContent = `${currentPlayer.name} has won the game`;
+            setTimeout(() => {alert(`${currentPlayer.name} has won the game`)}, 200);
+            removeEventListeners();
+            return;
+        } else
+        //change turn
+        toggleTurn();
+            
+        
+    }
     const init = () => {
         //clean up existing elements
         if (htmlGameBoard.children.length !== 0) {
             htmlGameBoard.children.forEach(e => e.remove());
+            currentPlayer = playerOne;
+            turnDisplay.textContent = `${currentPlayer.name} Turn`;
         }
 
         //add grid based on the board arrray 
@@ -51,35 +111,28 @@ const displayController = (() =>{
         }
         //and add event listener for click
         let grids = document.querySelectorAll('.gameboard-grid');
-        grids.forEach(el => el.addEventListener('click', e => {
-            console.log(e.target);
-            const turnDisplay = document.querySelector('#player-turn');
-            
-            let i = e.target.getAttribute('data-i-index');
-            let j = e.target.getAttribute('data-j-index');
-            if (gameBoard.board[i][j] === '') {
-                gameBoard.board[i][j] = currentPlayer.item;
-                e.target.classList.add(currentPlayer.item);
-                console.table(gameBoard.board);
-            }
-            //change turn
-            if (currentPlayer == playerOne) {
-                currentPlayer = playerTwo;
-            } else {
-                currentPlayer = playerOne;
-            }
-            turnDisplay.textContent = `${currentPlayer.name} Turn`;
-        })
+        grids.forEach(el => el.addEventListener('click', handler)
         )
     }
+    
     return {init};
 })()
 
 
-
+const turnDisplay = document.querySelector('#player-turn');
 const playerOne = player('Player 1', 'o');
 const playerTwo = player('Player 2', 'x');
 let currentPlayer = playerOne;
 
 gameBoard.init();
 displayController.init();
+
+function toggleTurn() {
+    //change turn
+    if (currentPlayer == playerOne) {
+        currentPlayer = playerTwo;
+    } else {
+        currentPlayer = playerOne;
+    }
+    turnDisplay.textContent = `${currentPlayer.name} Turn`;
+}
