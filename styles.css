@@ -64,9 +64,17 @@ p{
 .x{
     background-image: url('assets/x.svg');
 }
+
+.o{
+    background-image: url('assets/circle.svg');
+}
 .gameboard-grid{
     height: 150px;
     width: 150px;
+}
+
+.gameboard-grid:hover{
+    cursor: pointer;
 }
 #new-game{
     width: 200px;
