@@ -51,8 +51,10 @@ const gameBoard = (() => {
             for(let j = 0; j < 3; j++) {
                 if (board[i][j] === player.item) consectutives++;
             }
-            return (consectutives === 3) ? true : false;
+            if (consectutives === 3) return true;
+            
         }
+        return false;
     }
 
     //add checker for gameOver
