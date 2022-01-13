@@ -96,7 +96,8 @@ const displayController = (() =>{
     const init = () => {
         //clean up existing elements
         if (htmlGameBoard.children.length !== 0) {
-            htmlGameBoard.children.forEach(e => e.remove());
+            let childrens = [...htmlGameBoard.children];
+            childrens.forEach(e => e.remove());
             currentPlayer = playerOne;
             turnDisplay.textContent = `${currentPlayer.name} Turn`;
         }
@@ -127,10 +128,15 @@ const displayController = (() =>{
 const turnDisplay = document.querySelector('#player-turn');
 const playerOne = player('Player 1', 'o');
 const playerTwo = player('Player 2', 'x');
+const newGameButton = document.querySelector('#new-game');
 let currentPlayer = playerOne;
 
 gameBoard.init();
 displayController.init();
+newGameButton.addEventListener('click', () => {
+    gameBoard.init();
+    displayController.init();
+})
 
 function toggleTurn() {
     //change turn
