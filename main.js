@@ -27,6 +27,8 @@ const gameBoard = (() => {
     const gameWon = player => {
         if (horizontalCheck(player)) {
             return true;
+        } else if (verticalCheck(player)) {
+            return true;
         } else {
             return false;
         }
@@ -53,6 +55,17 @@ const gameBoard = (() => {
             }
             if (consectutives === 3) return true;
             
+        }
+        return false;
+    }
+
+    const verticalCheck = player => {
+        for(let column = 0; column < 3; column++) {
+            let consectutives = 0;
+            for(let row = 0; row < 3; row++) {
+                if (board[row][column] === player.item) consectutives++;
+            }
+            if (consectutives === 3) return true;
         }
         return false;
     }
