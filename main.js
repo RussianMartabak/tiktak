@@ -82,7 +82,12 @@ const displayController = (() =>{
             setTimeout(() => {alert(`${currentPlayer.name} has won the game`)}, 200);
             removeEventListeners();
             return;
-        } else
+        } else if (gameBoard.isFull()) {
+            turnDisplay.textContent = `Stalemate! Nobody Wins`;
+            setTimeout(() => {alert(`Stalemate! Nobody Wins`)}, 200);
+            removeEventListeners();
+            return;
+        }
         //change turn
         toggleTurn();
             
