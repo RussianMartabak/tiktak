@@ -29,6 +29,8 @@ const gameBoard = (() => {
             return true;
         } else if (verticalCheck(player)) {
             return true;
+        } else if (diagonalCheck(player)) {
+            return true;
         } else {
             return false;
         }
@@ -66,6 +68,23 @@ const gameBoard = (() => {
                 if (board[row][column] === player.item) consectutives++;
             }
             if (consectutives === 3) return true;
+        }
+        return false;
+    }
+
+    const diagonalCheck = player => {
+        for(let column = 0; column < 3; column += 2) {
+            //for each uppermost edges
+            let consectutives = 0;
+            let step;
+            (column === 0) ? step = 1 : step = -1;
+            for(let row = 0; row < 3 && row >= 0;) {
+                if (board[row][column] === player.item) consectutives++;
+                row += step;
+                column += step;
+            }
+            
+            if (consectutives === 3) return true; 
         }
         return false;
     }
